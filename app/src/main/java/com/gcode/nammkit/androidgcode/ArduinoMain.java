@@ -155,7 +155,8 @@ public class ArduinoMain extends AppCompatActivity {
 
         //I send a character when resuming.beginning transmission to check device is connected
         //If it is not an exception will be thrown in the write method and finish() will be called
-        //mConnectedThread.write("x");
+        //recDataString.delete(0,recDataString.length());
+        //mConnectedThread.write("M20\n");
     }
 
     @Override
