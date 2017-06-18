@@ -50,6 +50,7 @@ public class ArduinoMain extends AppCompatActivity {
 
     // String for MAC address
     private static String address;
+    public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
     ListView simpleList;
     String countryList[] = {"India", "China", "Australia", "Portugal", "America", "New Zddealand"};
@@ -108,6 +109,7 @@ public class ArduinoMain extends AppCompatActivity {
         btnJog.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ArduinoMain.this, ControlMain.class);
+                i.putExtra(EXTRA_DEVICE_ADDRESS, address);
                 startActivity(i);
             }
         });
