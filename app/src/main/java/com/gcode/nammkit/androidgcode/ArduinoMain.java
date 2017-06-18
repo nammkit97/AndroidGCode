@@ -53,7 +53,7 @@ public class ArduinoMain extends AppCompatActivity {
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
     ListView simpleList;
-    String countryList[] = {"India", "China", "Australia", "Portugal", "America", "New Zddealand"};
+    String publicFileList[] ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class ArduinoMain extends AppCompatActivity {
                         String[] rawNames = bufferString.split("[\n]");
                         String[] fileNames = Arrays.copyOfRange(rawNames,1,rawNames.length-2);
                         updateList(fileNames);
+                        publicFileList = fileNames;
                     }
                 }
             }
@@ -245,7 +246,8 @@ public class ArduinoMain extends AppCompatActivity {
             // Get the device MAC address, which is the last 17 chars in the View
             //String info = ((TextView) v).getText().toString();
             //String address = info.substring(info.length() - 17);
-            Toast.makeText(getBaseContext(), outputStr, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), publicFileList[position], Toast.LENGTH_SHORT).show();
+            mConnectedThread.write("M23"+publicFileList[position]+"\nM24\n");
         }
     };
     private void updateList(String[] fileNames) {
