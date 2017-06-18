@@ -8,66 +8,129 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/testView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtString"
-        android:text=""
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/txtString"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignLeft="@+id/testView1"
-        android:layout_alignParentBottom="true"
-        android:text=""
-
-        android:textSize="15sp" />
-
     <Button
-        android:id="@+id/buttonOn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Show File List" />
-
-    <Button
-        android:id="@+id/buttonOff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Refresh File List"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/buttonOn"
-        android:layout_toEndOf="@+id/buttonOn" />
-
-    <TextView
-        android:id="@+id/sensorView1"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/buttonOff"
-        android:text="Sensor 1 Voltage = ????"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/buttonOn"
-        android:layout_toEndOf="@+id/buttonOn" />
-
-    <ListView android:id="@+id/simpleListView"
-        android:layout_below="@id/sensorView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stackFromBottom="false"
-        android:layout_weight="1"  />
-
-    <Button
-        android:text="Printer Controled"
+        android:text="Start Print"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonJog"
-        android:layout_alignBottom="@+id/sensorView1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="-10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonJog"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/xMinusLarge" />
+
+    <Button
+        android:text="-1.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/xMinusLarge"
+        android:layout_toRightOf="@+id/xMinusLarge"
+        android:layout_toEndOf="@+id/xMinusLarge"
+        android:id="@+id/xMinusSmall" />
+
+    <Button
+        android:text="home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/xMinusSmall"
+        android:layout_toRightOf="@+id/xMinusSmall"
+        android:layout_toEndOf="@+id/xMinusSmall"
+        android:id="@+id/xHome" />
+
+    <Button
+        android:text="+1.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/xHome"
+        android:layout_toRightOf="@+id/xHome"
+        android:layout_toEndOf="@+id/xHome"
+        android:id="@+id/xAddSmall" />
+
+    <Button
+        android:text="+10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/xAddSmall"
+        android:layout_toRightOf="@+id/xAddSmall"
+        android:layout_toEndOf="@+id/xAddSmall"
+        android:id="@+id/xAddLarge" />
+
+    <TextView
+        android:text="x-axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_alignBaseline="@+id/xMinusLarge"
+        android:layout_alignBottom="@+id/xMinusLarge"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="-1.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yMinusSmall"
+        android:layout_alignBaseline="@+id/yMinusLarge"
+        android:layout_alignBottom="@+id/yMinusLarge"
+        android:layout_toRightOf="@+id/yMinusLarge"
+        android:layout_toEndOf="@+id/yMinusLarge" />
+
+    <Button
+        android:text="-10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yMinusLarge"
+        android:layout_below="@+id/xMinusLarge"
+        android:layout_alignLeft="@+id/xMinusLarge"
+        android:layout_alignStart="@+id/xMinusLarge" />
+
+    <TextView
+        android:text="y-axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:layout_alignBaseline="@+id/yMinusLarge"
+        android:layout_alignBottom="@+id/yMinusLarge"
+        android:layout_toLeftOf="@+id/xMinusLarge"
+        android:layout_toStartOf="@+id/xMinusLarge" />
+
+    <Button
+        android:text="home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yHome"
+        android:layout_alignBaseline="@+id/yMinusSmall"
+        android:layout_alignBottom="@+id/yMinusSmall"
+        android:layout_toRightOf="@+id/xMinusSmall"
+        android:layout_toEndOf="@+id/xMinusSmall" />
+
+    <Button
+        android:text="+1.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/yHome"
+        android:layout_toRightOf="@+id/xHome"
+        android:layout_toEndOf="@+id/xHome"
+        android:id="@+id/yAddSmall" />
+
+    <Button
+        android:text="+10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/yAddSmall"
+        android:layout_toRightOf="@+id/xAddSmall"
+        android:layout_toEndOf="@+id/xAddSmall"
+        android:id="@+id/yAddLarge" />
 
 </RelativeLayout>

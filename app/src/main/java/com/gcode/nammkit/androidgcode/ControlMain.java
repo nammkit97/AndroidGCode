@@ -34,8 +34,7 @@ import android.view.View.OnClickListener;
 
 public class ControlMain extends AppCompatActivity {
 
-    Button btnOn, btnOff, btnJog;
-    TextView txtString, txtStringLength, sensorView1;
+    Button btnJog, btn_xMinusLarge, btn_xMinusSmall, btn_xHome, btn_xAddSmall, btn_xAddLarge;
     Handler bluetoothIn;
 
     final int handlerState = 0;                        //used to identify handler message
@@ -52,8 +51,7 @@ public class ControlMain extends AppCompatActivity {
     private static String address;
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
-    ListView simpleList;
-    String countryList[] = {"India", "China", "Australia", "Portugal", "America", "New Zddealand"};
+    private int xCurrent = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,12 +60,15 @@ public class ControlMain extends AppCompatActivity {
         setContentView(R.layout.activity_control_main);
 
         //Link the buttons and textViews to respective views
-        btnOn = (Button) findViewById(R.id.buttonOn);
-        btnOff = (Button) findViewById(R.id.buttonOff);
         btnJog = (Button) findViewById(R.id.buttonJog);
-        txtString = (TextView) findViewById(R.id.txtString);
-        txtStringLength = (TextView) findViewById(R.id.testView1);
-        sensorView1 = (TextView) findViewById(R.id.sensorView1);
+
+        btn_xMinusLarge = (Button) findViewById(R.id.xMinusLarge);
+        btn_xMinusSmall = (Button) findViewById(R.id.xMinusSmall);
+        btn_xHome = (Button) findViewById(R.id.xHome);
+        btn_xAddSmall = (Button) findViewById(R.id.xAddSmall);
+        btn_xAddLarge = (Button) findViewById(R.id.xAddLarge);
+
+
 
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -75,15 +76,6 @@ public class ControlMain extends AppCompatActivity {
                     String readMessage = (String) msg.obj;
                     recDataString.append(readMessage);
                     String bufferString=recDataString.toString();
-                    sensorView1.setText(bufferString);
-                    int endOfLineIndex = recDataString.indexOf("End file list");
-                    if (endOfLineIndex > 0) {
-                        if (recDataString.charAt(0) == 'B'){
-                            String[] rawNames = bufferString.split("[\n]");
-                            String[] fileNames = Arrays.copyOfRange(rawNames,1,rawNames.length-2);
-                            updateList(fileNames);
-                        }
-                    }
                 }
             }
         };
@@ -91,26 +83,38 @@ public class ControlMain extends AppCompatActivity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
-        // Set up onClick listeners for buttons to send 1 or 0 to turn on/off LED
-        btnOff.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                recDataString.delete(0,recDataString.length());
-                mConnectedThread.write("M21\n");    // Send "0" via Bluetooth
-            }
-        });
-
-        btnOn.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                recDataString.delete(0,recDataString.length());
-                mConnectedThread.write("M20\n");    // Send "1" via Bluetooth
-            }
-        });
-
         btnJog.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(ControlMain.this, ArduinoMain.class);
                 i.putExtra(EXTRA_DEVICE_ADDRESS, address);
                 startActivity(i);
+            }
+        });
+
+        btn_xMinusLarge.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("G91\nG0X-10\nG90\n");
+            }
+        });
+        btn_xMinusSmall.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("G91\nG0X-1\nG90\n");
+            }
+        });
+        btn_xHome.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("G28X\n");
+            }
+        });
+        btn_xAddSmall.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("G91\nG0X1\nG90\n");
+            }
+        });
+        btn_xAddLarge.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                xCurrent += 10;
+                mConnectedThread.write("G91\nG0X10\nG90\n");
             }
         });
     }
@@ -248,10 +252,4 @@ public class ControlMain extends AppCompatActivity {
             Toast.makeText(getBaseContext(), outputStr, Toast.LENGTH_SHORT).show();
         }
     };
-    private void updateList(String[] fileNames) {
-        simpleList = (ListView)findViewById(R.id.simpleListView);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_listview, R.id.textView, fileNames);
-        simpleList.setAdapter(arrayAdapter);
-        simpleList.setOnItemClickListener(mDeviceClickListener);
-    }
 }
