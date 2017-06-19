@@ -64,18 +64,6 @@
         android:layout_toEndOf="@+id/xAddSmall"
         android:id="@+id/xAddLarge" />
 
-    <TextView
-        android:text="x-axis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:layout_alignBaseline="@+id/xMinusLarge"
-        android:layout_alignBottom="@+id/xMinusLarge"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:text="-1.0"
         android:layout_width="wrap_content"
@@ -187,5 +175,33 @@
         android:layout_alignBottom="@+id/zMinusLarge"
         android:layout_alignLeft="@+id/textView5"
         android:layout_alignStart="@+id/textView5" />
+
+    <TextView
+        android:text="x-axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_alignBaseline="@+id/xMinusLarge"
+        android:layout_alignBottom="@+id/xMinusLarge"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Home All Axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeAll"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="move to Origin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/homeAll"
+        android:layout_toEndOf="@+id/homeAll"
+        android:id="@+id/origin" />
 
 </RelativeLayout>

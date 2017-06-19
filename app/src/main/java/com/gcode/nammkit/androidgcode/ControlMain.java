@@ -35,6 +35,7 @@ import android.view.View.OnClickListener;
 public class ControlMain extends AppCompatActivity {
 
     Button btnJog, btn_xMinusLarge, btn_xMinusSmall, btn_xHome, btn_xAddSmall, btn_xAddLarge;
+    Button btnHome, btnOrigin;
     Handler bluetoothIn;
 
     final int handlerState = 0;                        //used to identify handler message
@@ -51,7 +52,6 @@ public class ControlMain extends AppCompatActivity {
     private static String address;
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
-    private int xCurrent = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,9 @@ public class ControlMain extends AppCompatActivity {
 
         //Link the buttons and textViews to respective views
         btnJog = (Button) findViewById(R.id.buttonJog);
+
+        btnHome = (Button) findViewById(R.id.homeAll);
+        btnOrigin = (Button) findViewById(R.id.origin);
 
         btn_xMinusLarge = (Button) findViewById(R.id.xMinusLarge);
         btn_xMinusSmall = (Button) findViewById(R.id.xMinusSmall);
@@ -91,6 +94,17 @@ public class ControlMain extends AppCompatActivity {
             }
         });
 
+        btnHome.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("G28\n");
+            }
+        });
+        btnOrigin.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                mConnectedThread.write("G90\nG0X0Y0Z0\n");
+            }
+        });
+
         btn_xMinusLarge.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("G91\nG0X-10\nG90\n");
@@ -113,7 +127,6 @@ public class ControlMain extends AppCompatActivity {
         });
         btn_xAddLarge.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                xCurrent += 10;
                 mConnectedThread.write("G91\nG0X10\nG90\n");
             }
         });
